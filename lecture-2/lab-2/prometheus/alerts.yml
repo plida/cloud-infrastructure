@@ -1,0 +1,36 @@
+groups:
+  - name: orders-api
+    rules:
+      - alert: HighErrorRate
+        expr: |
+          sum(rate(http_requests_total{job="orders-api", status="5xx"}[5m]))
+          /
+          sum(rate(http_requests_total{job="orders-api", handler!="/metrics", handler!="none"}[5m])) > 0.01
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Высокая доля ошибок 5xx в orders-api"
+          description: "Доля ошибок > 5% (текущее: {{ $value | humanizePercentage }})"
+
+      - alert: HighLatencyP95
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(http_request_duration_seconds_bucket{job="orders-api"}[5m])) by (le)
+          ) > 0.3
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "p95 ответа orders-api выше 0.3 секунды"
+          description: "95-й перцентиль времени ответа > 0.3s (текущее: {{ $value | humanizeDuration }})"
+
+      - alert: RequestRateSpike
+        expr: |
+          sum(rate(http_requests_total{job="orders-api"}[1m])) > 0.5
+        for: 30s
+        labels:
+          severity: info
+        annotations:
+          summary: "Всплеск запросов к orders-api"
+          description: "RPS > 0.5 в течение 30 секунд (текущее: {{ $value | humanize }} req/s)"

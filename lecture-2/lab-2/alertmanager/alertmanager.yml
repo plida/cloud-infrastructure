@@ -1,0 +1,12 @@
+route:
+  receiver: "default"
+  group_by: ["alertname"]
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1h
+
+receivers:
+  - name: "default"
+    webhook_configs:
+      - url: "https://webhook.site/dbdddc7f-f33c-4972-ad29-fe494293e840"
+        send_resolved: true
