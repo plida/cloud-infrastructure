@@ -1,0 +1,29 @@
+groups:
+  - name: kafka
+    rules:
+      - alert: KafkaBrokerDown
+        expr: up{job="kafka-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Kafka broker недоступен"
+          description: "Prometheus не может собрать метрики с kafka-exporter больше 1 минуты"
+
+      - alert: ConsumerGroupLagHigh
+        expr: sum(kafka_consumergroup_lag{consumergroup="picker-group"}) > 100
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Consumer group picker-group отстаёт"
+          description: "Суммарный lag > 100 в течение 2 минут"
+
+      - alert: NoActiveConsumers
+        expr: kafka_consumergroup_members{consumergroup="picker-group"} == 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Нет активных потребителей в picker-group"
+          description: "В группе picker-group нет ни одного активного consumer'а"
