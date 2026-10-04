@@ -135,13 +135,13 @@ sum(rate(http_requests_total{job="orders-api"}[1m])) > 0.5
 
 ## Скриншоты
 
-[`screenshots/dashboard.png`](screenshots/dashboard.png) Grafana с RED-дашбордом после нагрузки
-[`screenshots/logs.png`](screenshots/logs.png) Loki с логами orders-api
-[`screenshots/logs-error.png`](screenshots/logs-error.png) Loki с логами ошибок
-[`screenshots/jaeger-slow.png`](screenshots/jaegar-slow.png) Jaeger с трейсом задержки и спаном `slow-dependency`
-[`screenshots/jaeger-error.png`](screenshots/jaegar-error.png) Jaeger с трейсом ошибки (красный спан)
-[`screenshots/alerts-prometheus.png`](screenshots/alerts-prometheus.png) Prometheus `/alerts`, три алерта в Firing
-[`screenshots/alerts-alertmanager.png`](screenshots/alerts-alertmanager.png) Alertmanager с тремя алертами
+![`screenshots/dashboard.png`](screenshots/dashboard.png) Grafana с RED-дашбордом после нагрузки
+![`screenshots/logs.png`](screenshots/logs.png) Loki с логами orders-api
+![`screenshots/logs-error.png`](screenshots/logs-error.png) Loki с логами ошибок
+![`screenshots/jaeger-slow.png`](screenshots/jaegar-slow.png) Jaeger с трейсом задержки и спаном `slow-dependency`
+![`screenshots/jaeger-error.png`](screenshots/jaegar-error.png) Jaeger с трейсом ошибки (красный спан)
+![`screenshots/alerts-prometheus.png`](screenshots/alerts-prometheus.png) Prometheus `/alerts`, три алерта в Firing
+![`screenshots/alerts-alertmanager.png`](screenshots/alerts-alertmanager.png) Alertmanager с тремя алертами
 
 ## Как запустить
 
